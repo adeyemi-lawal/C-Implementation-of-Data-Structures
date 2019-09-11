@@ -1,0 +1,88 @@
+#include <iostream>
+
+
+
+struct BstNode
+{
+    int data;
+    BstNode *left;
+    BstNode *right;
+
+};
+
+
+
+BstNode *CreateNode(int data)
+{
+    BstNode *newnode = new BstNode;
+    newnode->data = data;
+    newnode->left = NULL;
+    newnode->right = NULL;
+
+    return newnode;
+    
+}
+
+
+
+BstNode *Insert(BstNode *root, int data)
+{
+    if (root == NULL)
+        root = CreateNode(data);
+    
+    else if (data <= root->data)
+        root->left = Insert(root->left, data);
+    
+    else
+        root->right = Insert(root->right, data);
+
+    return root;
+    
+}
+
+
+
+
+
+bool Search(BstNode *root, int data)
+{
+    if (root == NULL)
+        return false;
+    
+    else if (data == root->data)
+        return true;
+    
+    else if (data <= root->data)
+        return Search(root->left, data);
+
+    
+    else
+        return Search(root->right, data);
+    
+
+}
+
+int main ()
+
+{
+    
+    BstNode *root = NULL;
+    root = Insert(root, 15);
+    root = Insert(root, 16);
+    root = Insert(root, 19);
+
+    int number;
+    std::cout << "Enter number to be searched";
+    std::cin >> number;
+    
+    
+    
+    if (Search(root, number) == true)
+        std::cout << "Number found";
+    else
+        std::cout << "Number not found";
+    
+}
+
+
+
